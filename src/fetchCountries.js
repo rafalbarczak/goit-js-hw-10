@@ -1,6 +1,6 @@
 export function fetchCountries(name) {
   return fetch(
-    `https://restcountries.com/v3.1/name/${name}?fuekds=name,capital,population,flags,languages`
+    `https://restcountries.com/v3.1/name/${name}?fields=name,capital,population,flags,languages`
   )
     .then(response => {
       if (!response.ok) {
@@ -11,5 +11,10 @@ export function fetchCountries(name) {
     .then(data => {
       return data;
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+      if (error.message == 404) {
+        return '';
+      }
+      console.log(error);
+    });
 }
